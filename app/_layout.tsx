@@ -43,10 +43,6 @@ export default function RootLayout() {
           <Stack.Screen name="HomeScreen" options={{ headerShown: false }} />
           <Stack.Screen name="Bill/index" options={{ title: "Create Bill" }} />
           <Stack.Screen name="Bill/Sign" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="Bill/ViewBillPdf"
-            options={{ headerShown: false }}
-          />
           <Stack.Screen name="+not-found" />
         </Stack>
       </ThemeProvider>

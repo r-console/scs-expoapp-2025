@@ -120,7 +120,7 @@ export default function LoginScreen() {
         console.log("login2")
         setLoginStatus(true)
         axios
-          .post(Services.LOGIN(inUrl), {
+          .post(Services.LOGIN(), {
             username: username1,
             password: password1,
           })
@@ -136,7 +136,7 @@ export default function LoginScreen() {
               )
               let curDate = new Date()
               axios
-                .post(Services.LOGIN_LOCATION(inUrl), {
+                .post(Services.LOGIN_LOCATION(), {
                   loginLocation: {
                     emp_id: response.data.userData.id,
                     lat: myLocation.latitude,
