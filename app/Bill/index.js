@@ -13,7 +13,6 @@ import DateTimePicker from "@react-native-community/datetimepicker"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useContext, useEffect, useState } from "react"
 import { Picker } from "@react-native-picker/picker"
-import moment from "moment"
 import { Link, useRouter } from "expo-router"
 import { useSelector, useDispatch } from "react-redux"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -174,11 +173,24 @@ export default function CreateBillScreen() {
         try {
           setInTimeSet(selectedDate)
           setTimeShow1(false)
-          let tm = moment(selectedDate).format("hh:mm A")
+          // let tm = moment(selectedDate).format("hh:mm A")
+          let tm = new Date(selectedDate).toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          })
+
           setInTime(tm)
 
           let nowTime = new Date()
-          let tm2 = moment(nowTime).format("hh:mm A")
+          // let tm2 = moment(nowTime).format("hh:mm A")
+
+          let tm2 = new Date(nowTime).toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          })
+
           setOutTime(tm2)
         } catch (error) {
           console.log(error.message)
@@ -199,7 +211,14 @@ export default function CreateBillScreen() {
       if (event.type === "set") {
         SetOutTimeSet(selectedDate)
         setTimeShow2(false)
-        let tm = moment(selectedDate).format("hh:mm A")
+        // let tm = moment(selectedDate).format("hh:mm A")
+
+        let tm = new Date(selectedDate).toLocaleTimeString("en-IN", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        })
+
         setOutTime(tm)
       }
       if (event.type == "dismissed") {

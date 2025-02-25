@@ -21,7 +21,6 @@ import { setUser, clearUser } from "./context/userSlice"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import Services from "@/constants/Services"
-import moment from "moment"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { setUrl, clearUrl } from "./context/urlSlice"
 
@@ -142,8 +141,12 @@ export default function LoginScreen() {
                     lat: myLocation.latitude,
                     lng: myLocation.longitude,
                     log_status: "login",
-                    log_date: moment(curDate).format("YYYY-MM-DD"),
-                    log_time: moment(curDate).format("hh:mm A"),
+                    log_date: curDate.toISOString().split("T")[0],
+                    log_time: curDate.toLocaleTimeString("en-IN", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: true,
+                    }),
                   },
                 })
                 .then((res) => {
