@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ramesh8.scsbilling"
+      "package": "com.ramesh8.scsbilling",
+      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"]
     },
     "web": {
       "bundler": "metro",

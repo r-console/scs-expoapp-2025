@@ -201,7 +201,7 @@ export default function LoginScreen() {
           </ThemedView>
 
           <TextInput
-            style={styles.InputBox}
+            style={[styles.InputBox, { display: "none" }]}
             onChangeText={(val) => {
               setInUrl(val)
               dispatch(setUrl(val))
@@ -211,7 +211,6 @@ export default function LoginScreen() {
             returnKeyType="next"
             defaultValue={inUrl}
           />
-
           <View>
             <TextInput
               style={styles.InputBox}
