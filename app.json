@@ -17,7 +17,17 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.ramesh8.scsbilling",
-      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"]
+      "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"],
+      "usesCleartextTraffic": true,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "category": ["BROWSABLE", "DEFAULT"],
+          "data": {
+            "scheme": "http"
+          }
+        }
+      ]
     },
     "web": {
       "bundler": "metro",

@@ -9,7 +9,7 @@ const Ipconfig = {
 
   // new aws2 2023
   BACKEND_IP: () => {
-    return "http://localhost:9000/v2"
+    return `http://3.108.63.57:9000/v2`
   },
   VERSION_CODE: () => {
     return 14

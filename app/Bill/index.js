@@ -266,7 +266,7 @@ export default function CreateBillScreen() {
     // {
     console.log("Network is connected so data posted to backend")
     axios
-      .post(Services.ADD_BILL(), {
+      .post("http://3.108.63.57:9000/v2/bill/addbill", {
         Bill: {
           employee_id: user.id,
           invoice_id: billDetails.invoice_id,

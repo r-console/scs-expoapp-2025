@@ -20,22 +20,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { setUser, clearUser } from "./context/userSlice"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import Services from "@/constants/Services"
+// import Services from "@/constants/Services"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { setUrl, clearUrl } from "./context/urlSlice"
 
 export default function LoginScreen() {
   const router = useRouter()
-  const user = useSelector((state: any) => state.user)
+  const user = useSelector((state) => state.user)
   const [inUrl, setInUrl] = useState("3.108.63.57")
   const dispatch = useDispatch()
-  const updateUserDetails = (
-    id: any,
-    name: any,
-    branch: any,
-    username: any,
-    last_invoice_id: any
-  ) => {
+  const updateUserDetails = (id, name, branch, username, last_invoice_id) => {
     dispatch(
       setUser({
         id: id,
@@ -87,12 +81,7 @@ export default function LoginScreen() {
     longitude: 0,
   })
 
-  const storeData = async (
-    id: Number,
-    name: String,
-    branch: String,
-    lastInvoiceId: Number
-  ) => {
+  const storeData = async (id, name, branch, lastInvoiceId) => {
     try {
       await AsyncStorage.setItem("employee_id", id.toString())
       await AsyncStorage.setItem("employee_name", name.toString())
@@ -119,7 +108,7 @@ export default function LoginScreen() {
         console.log("login2")
         setLoginStatus(true)
         axios
-          .post(Services.LOGIN(), {
+          .post("http://3.108.63.57:9000/v2/auth/login", {
             username: username1,
             password: password1,
           })
@@ -135,7 +124,7 @@ export default function LoginScreen() {
               )
               let curDate = new Date()
               axios
-                .post(Services.LOGIN_LOCATION(), {
+                .post("http://3.108.63.57:9000/v2/auth/loginlocation", {
                   loginLocation: {
                     emp_id: response.data.userData.id,
                     lat: myLocation.latitude,
@@ -163,7 +152,8 @@ export default function LoginScreen() {
           .catch((error) => {
             setLoginStatus(false)
             alert(
-              "Something wrong!!.Please check your username, password and internet connection"
+              // "Something wrong!!.Please check your username, password and internet connection",
+              error.message
             )
             console.log(error)
             ToastAndroid.show("Try Again", ToastAndroid.SHORT)
@@ -196,7 +186,7 @@ export default function LoginScreen() {
           }
         >
           <ThemedView style={styles.titleContainer}>
-            <ThemedText type="title">SCS Login</ThemedText>
+            <ThemedText type="title">SCS Login v2</ThemedText>
             {/* <HelloWave /> */}
           </ThemedView>
 
