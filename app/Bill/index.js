@@ -10,7 +10,7 @@ import {
 } from "react-native"
 
 import DateTimePicker from "@react-native-community/datetimepicker"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons"
 import { useContext, useEffect, useState } from "react"
 import { Picker } from "@react-native-picker/picker"
 import { Link, useRouter } from "expo-router"
@@ -51,6 +51,7 @@ export default function CreateBillScreen() {
 
   const [posting, setPosting] = useState(false)
   const [billSaved, setBillSaved] = useState(false)
+  const [networkError, setNetworkError] = useState(false)
 
   const app_version = "1.0.9"
 
@@ -246,6 +247,8 @@ export default function CreateBillScreen() {
 
   const FinalSUBMIT = async () => {
     setPosting(true)
+    setBillSaved(false)
+    setNetworkError(false)
     let lastInvoiceId = parseInt(await AsyncStorage.getItem("last_invoice_id"))
     AsyncStorage.setItem("last_invoice_id", (lastInvoiceId + 1).toString())
 
@@ -307,6 +310,8 @@ export default function CreateBillScreen() {
         setBillSaved(true)
       })
       .catch((error) => {
+        setBillSaved(false)
+        setNetworkError(true)
         if (error == "Error: Network Error") {
           // CreateJson(nowInvoiceId)
           // CreatePDF()
@@ -374,7 +379,9 @@ export default function CreateBillScreen() {
                 },
               ]}
             >
-              {billSaved ? (
+              {networkError ? (
+                <MaterialIcons name="error-outline" size={40} color="#fff" />
+              ) : billSaved ? (
                 <MaterialCommunityIcons
                   name="check"
                   style={{ alignSelf: "center", padding: 10 }}
@@ -387,8 +394,41 @@ export default function CreateBillScreen() {
             </View>
           </View>
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-            {billSaved ? "Bill Saved Successfully..." : "Connecting server..."}
+            {networkError
+              ? "Network Error"
+              : billSaved
+              ? "Bill Saved Successfully..."
+              : "Connecting server..."}
           </Text>
+
+          {!billSaved && (
+            <Pressable onPress={() => FinalSUBMIT()} style={{ width: "80%" }}>
+              <View
+                style={{ marginTop: 20, width: "100%", paddingHorizontal: 40 }}
+              >
+                <View
+                  style={[
+                    styles.signIn,
+                    {
+                      borderColor: "#888",
+                      borderWidth: 1,
+                      backgroundColor: "#16233f",
+                      marginTop: 10,
+                      flexDirection: "row",
+                    },
+                  ]}
+                >
+                  <Text style={styles.textSign}>Retry </Text>
+                  <MaterialCommunityIcons
+                    name="file"
+                    style={{ alignSelf: "center" }}
+                    size={20}
+                    color="#fff"
+                  />
+                </View>
+              </View>
+            </Pressable>
+          )}
         </View>
       )}
 

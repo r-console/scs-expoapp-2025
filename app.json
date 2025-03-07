@@ -18,7 +18,6 @@
       },
       "package": "com.ramesh8.scsbilling",
       "permissions": ["INTERNET", "ACCESS_NETWORK_STATE"],
-      "usesCleartextTraffic": true,
       "intentFilters": [
         {
           "action": "VIEW",
@@ -44,6 +43,15 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          },
+          "ios": {}
+        }
       ]
     ],
     "experiments": {
@@ -62,7 +70,8 @@
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/e6f2d711-197f-4f99-a04a-bcce20d40a6c"
+      "url": "https://u.expo.dev/e6f2d711-197f-4f99-a04a-bcce20d40a6c",
+      "fallbackToCacheTimeout": 0
     }
   }
 }

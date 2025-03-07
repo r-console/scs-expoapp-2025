@@ -35,6 +35,7 @@ export default function HomeScreen() {
         <View>
           <Text style={styles.text}>Name: {user.name}</Text>
         </View>
+
         <Text>{`\n`}</Text>
         {/* <View>
           <Text style={styles.text}>Username: {user.username}</Text>

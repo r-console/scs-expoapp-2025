@@ -164,3 +164,5 @@ const htmlContent = (simage, cimage, machineHtmlData, Bill) => {
     </body>
     </html>`
 }
+
+export default htmlContent

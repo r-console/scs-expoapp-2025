@@ -14,7 +14,7 @@ import { HelloWave } from "@/components/HelloWave"
 import ParallaxScrollView from "@/components/ParallaxScrollView"
 import { ThemedText } from "@/components/ThemedText"
 import { ThemedView } from "@/components/ThemedView"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons"
 import { Link, useRouter } from "expo-router"
 import { useDispatch, useSelector } from "react-redux"
 import { setUser, clearUser } from "./context/userSlice"
@@ -186,7 +186,7 @@ export default function LoginScreen() {
           }
         >
           <ThemedView style={styles.titleContainer}>
-            <ThemedText type="title">SCS Login v2</ThemedText>
+            <ThemedText type="title">SCS Login</ThemedText>
             {/* <HelloWave /> */}
           </ThemedView>
 
